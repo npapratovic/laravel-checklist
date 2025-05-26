@@ -7,4 +7,5 @@ Checklist on starting a new Laravel project
 - [ ] Use flareapp to quickly receive notification if error happens
 - [ ] Use postmark for transactional emails
 - [ ] Use PEST for Laravel tests
+- [ ] See Nuno Maduro essentials checklist: https://github.com/nunomaduro/essentials 
  

@@ -9,7 +9,7 @@ Checklist on starting a new Laravel project
 - [ ] Use postmark for transactional emails
 - [ ] Use PEST for Laravel tests pestphp/pest
 - [ ] use phpstan/phpstan
-- [ ] avoid database cascade deletes and default values https://www.youtube.com/watch?v=OZGbySrPhX0 
+- [ ] avoid database cascade deletes and default values https://www.youtube.com/watch?v=OZGbySrPhX0  focus on maintaining data integrity at the database level and handling business logic within the application layer. In other words, data doesn’t get deleted unless it’s explicitly defined in the application domain. 
 - [ ] use rectorphp if you use legacy code rector/rector https://www.youtube.com/watch?v=15tsiv6AvnE 
 - [ ] See Nuno Maduro essentials checklist: https://github.com/nunomaduro/essentials
 - [ ] https://www.youtube.com/live/DR1o-u2AFPA?si=0wslGiW6VcDU0Yf3&t=1662  <-- see here for defaults also LIVE 35

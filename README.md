@@ -1,6 +1,7 @@
 # laravel-checklist
 Checklist on starting a new Laravel project
 
+- [ ] start new laravel app in 2 commands: `1) laravel new +ime_aplikacije` `2) composer run dev`
 - [ ] Use Laravel Pint for code  formatting tool for PHP / code structure / style https://www.youtube.com/watch?v=s4PonV1wLRQ  https://youtu.be/JUDQuymlsh0?si=e3BK0DKCPHBQQrUO&t=1140  
 - [ ] Use Larastan for code analysis https://github.com/larastan/larastan
 - [ ] Use Log viewer to simplify vieweing logs

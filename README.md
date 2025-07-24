@@ -1,4 +1,8 @@
 # laravel-checklist
+
+laravel new project-name, cd project-name, composer require laravel/breeze --dev, php artisan breeze:install react, npm install, npm run dev
+
+
 Checklist on starting a new Laravel project
 
 - [ ] start new laravel app in 2 commands: `1) laravel new +app_name` `2) composer run dev`

@@ -21,7 +21,7 @@ Checklist on starting a new Laravel project
 - [ ] https://www.youtube.com/watch?v=-r1UDrQJJdQ Laravel + API + Actions + React + TypeScript LIVE 37
 - [ ] https://www.youtube.com/watch?v=vDcCmP0q8Kw Chat, Merging PRs on new SaaS, testing LIVE 38
 - [ ] https://www.youtube.com/watch?v=uMQFMw4wfu0 Finishing models + coding a queue job and testing it! LIVE 39
-- [ ] https://github.com/aamimi/offerly-backend vidi tetsove, modele, controllere, invokable klase, composer.json ...
+- [ ] https://github.com/aamimi/offerly-backend vidi testove, modele, controllere, invokable klase, composer.json ...
 - [ ] Implement logging for slow queries and lazy loading prevention https://github.com/npapratovic/laravel-checklist/blob/master/AppServiceProvider.php
 - [ ] Add AppendQueryCount middleware for query tracking
    - https://github.com/npapratovic/laravel-checklist/blob/master/bootstrap-app.php

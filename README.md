@@ -29,5 +29,40 @@ Checklist on starting a new Laravel project
    - https://github.com/npapratovic/laravel-checklist/blob/master/LazyLoadingFlag-Trait.php
 - [ ] Embrace Data Transfer Objects (DTOs) for Robust Data Handling, Benefits: Type-hinting, validation centralization, immutability, and easier testing.
    - https://github.com/npapratovic/laravel-checklist/blob/master/CreateUserData-DTO.php
-   - https://github.com/npapratovic/laravel-checklist/blob/master/UserController.php 
+   - https://github.com/npapratovic/laravel-checklist/blob/master/UserController.php
+- [ ] Use Services and Actions to have slimmer controllers:
+
+If it does 1 thing → Action, see example:
  
+```
+class CreateDriverAction
+{
+    public function execute(array $data): Driver
+    {
+        // single operation, easy to test
+        return Driver::create($data);
+    }
+}
+```
+
+If it coordinates several things → Service, see example: (example usage: https://github.com/npapratovic/laravel-checklist/blob/master/UserController.php)
+
+```
+class CreateClientService
+{
+    public function handle(array $data): Client
+    {
+        // orchestrate actions + integration logic
+
+        $client = (new CreateClientAction())->execute($data);
+
+        // hitting external API
+        $cloudwaysApp = (new CreateCloudwaysAppAction())->execute($client);
+
+        // updating tenant meta
+        (new UpdateTenantSysUserAction())->execute($client, $cloudwaysApp);
+
+        return $client;
+    }
+}
+```

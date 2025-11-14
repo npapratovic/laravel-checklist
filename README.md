@@ -27,4 +27,7 @@ Checklist on starting a new Laravel project
    - https://github.com/npapratovic/laravel-checklist/blob/master/bootstrap-app.php
    - https://github.com/npapratovic/laravel-checklist/blob/master/AppendQueryCount-Middleware.php 
    - https://github.com/npapratovic/laravel-checklist/blob/master/LazyLoadingFlag-Trait.php
+- [ ] Embrace Data Transfer Objects (DTOs) for Robust Data Handling, Benefits: Type-hinting, validation centralization, immutability, and easier testing.
+   - https://github.com/npapratovic/laravel-checklist/blob/master/CreateUserData-DTO.php
+   - https://github.com/npapratovic/laravel-checklist/blob/master/UserController.php 
  

@@ -3,7 +3,7 @@
 Rule of the thumb for placing logic: 
 
 1) Use controllers for HTTP requests and responses
-2) Use service classes for complex logic
+2) Use service classes for complex business logic
 3) Use action classes for one-time actions
 4) Use form request classes for input validaiton
 5) Use policies for auth check

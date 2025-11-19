@@ -9,7 +9,8 @@ Rule of the thumb for placing logic:
 5) Use policies for auth check
 6) Use enums instead of constants
 7) Use models to interact with database
-8) Use DTO for type-safety 
+8) Use DTO for type-safety
+9) Use resource classes to format output
 
 laravel new project-name, cd project-name, composer require laravel/breeze --dev, php artisan breeze:install react, npm install, npm run dev
 

@@ -104,3 +104,55 @@ class ArticleService
     }
 }
 ```
+
+- [ ] Fat Models, Skinny Controllers:
+
+_Shift database logic to Eloquent models to maintain cleaner controllers and reusable code_
+
+Bad controller example: 
+
+```
+public function index()
+{
+    $clients = Client::verified()
+        ->with(['orders' => function ($query) {
+            $query->where('created_at', '>', now()->subDays(7));
+        }])
+        ->get();
+
+    return view('index', compact('clients'));
+}
+```
+
+Good example - separated logic, move the DB queries to Eloquent, and use query scopes in Model: 
+
+```
+public function index(Client $client)
+{
+    return view('index', ['clients' => $client->getVerifiedWithRecentOrders()]);
+}
+
+class Client extends Model
+{
+    public function getVerifiedWithRecentOrders(): Collection
+    {
+        return $this->verified()
+            ->with(['orders' => fn($query) => $query->recent()])
+            ->get();
+    }
+
+    public function scopeVerified($query)
+    {
+        return $query->where('is_verified', true);
+    }
+}
+
+class Order extends Model
+{
+    public function scopeRecent($query)
+    {
+        return $query->where('created_at', '>', now()->subDays(7));
+    }
+}
+```
+

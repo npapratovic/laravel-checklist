@@ -32,6 +32,8 @@ Checklist on starting a new Laravel project
    - https://github.com/npapratovic/laravel-checklist/blob/master/UserController.php
 - [ ] Use Services and Actions to have slimmer controllers:
 
+_Controllers should only handle HTTP requests and responses, delegating complex logic to service classes. This keeps code clean, reusable, and easier to test._
+
 If it does 1 thing → Action, see example:
  
 ```

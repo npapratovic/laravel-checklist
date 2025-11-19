@@ -68,3 +68,38 @@ class CreateClientService
     }
 }
 ```
+
+Bad example:
+
+```
+public function store(Request $request)
+{
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $image->storeAs('temp', $image->getClientOriginalName(), 'public');
+    }
+    
+    // Other unrelated logic...
+}
+```
+
+Good example:
+
+```
+public function store(Request $request, ArticleService $articleService)
+{
+    $articleService->uploadImage($request->file('image'));
+
+    // Other unrelated logic...
+}
+
+class ArticleService
+{
+    public function uploadImage(?UploadedFile $image): void
+    {
+        if ($image) {
+            $image->storeAs('uploads/temp', uniqid() . '_' . $image->getClientOriginalName(), 'public');
+        }
+    }
+}
+```

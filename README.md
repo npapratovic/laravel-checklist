@@ -1,5 +1,16 @@
 # laravel-checklist
 
+Rule of the thumb for placing logic: 
+
+1) Use controllers for HTTP requests and responses
+2) Use service classes for complex logic
+3) Use action classes for one-time actions
+4) Use form request classes for input validaiton
+5) Use policies for auth check
+6) Use enums instead of constants
+7) Use models to interact with database
+8) Use DTO for type-safety 
+
 laravel new project-name, cd project-name, composer require laravel/breeze --dev, php artisan breeze:install react, npm install, npm run dev
 
 

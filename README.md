@@ -12,8 +12,8 @@ Rule of the thumb for placing logic:
 8) Use DTO for type-safety
 9) Use resource classes to format output
 
-laravel new project-name, cd project-name, composer require laravel/breeze --dev, php artisan breeze:install react, npm install, npm run dev
-
+1. create a repo on github, git clone locally
+2. add some files with laravel new and commit
 
 Checklist on starting a new Laravel project
 

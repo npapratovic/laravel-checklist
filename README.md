@@ -12,6 +12,18 @@ Rule of the thumb for placing logic:
 8) Use DTO for type-safety
 9) Use resource classes to format output
 
+On production environments, make sure this is set: 
+```
+APP_NAME=App_name #you appname with undercores
+APP_ENV=production # set this to production, defualt value is 'local' 
+APP_KEY=base64:y+tVRZOGnfGi7p9RZf0rpceQVshKufe85o0oUibMvXs=  #make sure they are rotated periodically 
+APP_DEBUG=false # make sure on production .env this is set to false, on all others it can be true
+APP_TIMEZONE=UTC #set the timezone always to UTC so it can be saved in DB in this format
+APP_URL=https://exampple.com
+```
+
+### To connect github remotely and locally: 
+
 1. create a repo on github, git clone locally
 2. add some files with laravel new and commit
 

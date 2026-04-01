@@ -67,6 +67,7 @@ composer run dev (edited)
 - [ ] https://www.youtube.com/watch?v=uMQFMw4wfu0 Finishing models + coding a queue job and testing it! LIVE 39
 - [ ] https://github.com/aamimi/offerly-backend vidi testove, modele, controllere, invokable klase, composer.json ...
 - [ ] Implement logging for slow queries and lazy loading prevention https://github.com/npapratovic/laravel-checklist/blob/master/AppServiceProvider.php
+- [ ] Check the Eloquent performances tutorial https://laracasts.com/series/eloquent-performance-patterns  
 - [ ] Add AppendQueryCount middleware for query tracking
    - https://github.com/npapratovic/laravel-checklist/blob/master/bootstrap-app.php
    - https://github.com/npapratovic/laravel-checklist/blob/master/AppendQueryCount-Middleware.php 

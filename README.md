@@ -22,6 +22,16 @@ APP_TIMEZONE=UTC #set the timezone always to UTC so it can be saved in DB in thi
 APP_URL=https://exampple.com
 ```
 
+Add the snippet below to the AppServiceProvider's boot method:
+```
+public function boot()
+{
+    Model::preventLazyLoading(! app()->isProduction());
+}
+```
+This will throw an exception whenever lazy loading is introduced in our queries during development.
+
+
 ### To connect github remotely and locally: 
 
 1. create a repo on github, git clone locally

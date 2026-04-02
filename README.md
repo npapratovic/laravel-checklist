@@ -51,6 +51,7 @@ composer run dev (edited)
 ```
 - [ ] Use Laravel Pint for code  formatting tool for PHP / code structure / style https://www.youtube.com/watch?v=s4PonV1wLRQ  https://youtu.be/JUDQuymlsh0?si=e3BK0DKCPHBQQrUO&t=1140  
 - [ ] Use Larastan for code analysis https://github.com/larastan/larastan
+- [ ] Check out this tutorial for laravel project structure https://laraveldaily.com/course/laravel-projects-structure 
 - [ ] Use Log viewer to simplify vieweing logs
 - [ ] Use flareapp to quickly receive notification if error happens
 - [ ] Use postmark for transactional emails

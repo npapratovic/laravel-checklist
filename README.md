@@ -55,9 +55,9 @@ git branch -M main
 git push -u origin main
 ```
 
-Checklist on starting a new Laravel project
 
 - [ ] start new laravel app in 2 commands: `1) laravel new +app_name` `2) composer run dev`
+      
 
 alternative install: 
 ```

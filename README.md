@@ -4,7 +4,7 @@ Rule of the thumb for placing logic:
 
 1) Use controllers for HTTP requests and responses
 2) Use service classes for external services and complex logic 
-3) Use action classes for business logic https://nabilhassen.com/action-pattern-in-laravel-concept-benefits-best-practices
+3) Use action classes for business logic https://nabilhassen.com/action-pattern-in-laravel-concept-benefits-best-practices  https://www.youtube.com/watch?v=r1480BoFulQ
 4)  An Action performs a business operation (something your application does). A Service wraps a utility or external integration (something your application uses). Actions call Services, not the other way around.
 5) Use form request classes for input validaiton
 6) Use policies for auth check

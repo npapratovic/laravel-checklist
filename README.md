@@ -34,8 +34,26 @@ This will throw an exception whenever lazy loading is introduced in our queries 
 
 ### To connect github remotely and locally: 
 
-1. create a repo on github, git clone locally
-2. add some files with laravel new and commit
+Create new repo on github "repo-name", 
+
+1) create a new folder locally and open it in git bash:
+ 
+```
+echo "# development-guidlines" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/username/repo-name.git
+git push -u origin main
+```
+
+2) …or push an existing repository from the command line
+```
+git remote add origin https://github.com/helioztechnologies/development-guidlines.git
+git branch -M main
+git push -u origin main
+```
 
 Checklist on starting a new Laravel project
 

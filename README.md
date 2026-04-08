@@ -3,8 +3,8 @@
 Rule of the thumb for placing logic: 
 
 1) Use controllers for HTTP requests and responses
-2) Use service classes for complex business logic
-3) Use action classes for one-time actions
+2) Use service classes for external services and complex logic 
+3) Use action classes for business logic https://nabilhassen.com/action-pattern-in-laravel-concept-benefits-best-practices 
 4) Use form request classes for input validaiton
 5) Use policies for auth check
 6) Use enums instead of constants

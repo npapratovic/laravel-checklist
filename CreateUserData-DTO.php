@@ -4,7 +4,7 @@
 class CreateUserData
 {
     public function __construct(
-        public readonly string $name,
+        public readonly string $name, // Using readonly in a Data Transfer Object (DTO) is a best practice for maintaining data integrity as information moves through your application's layers (Controller → Action → Service)
         public readonly string $email,
         public readonly string $password,
         public readonly ?string $role = 'user'

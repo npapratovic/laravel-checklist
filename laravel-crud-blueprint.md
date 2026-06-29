@@ -19,21 +19,23 @@ All CRUD operations and business logic must be implemented using the decoupled *
 
 ## 2. Coding Style & Formatting
 
-* **Code Preservation:** Existing code, whitespaces, blank lines, and array structural patterns (whether written inline or multiline) **must left untouched** unless that specific line is being directly refactored.
+* **Code Preservation:** Existing code, whitespaces, blank lines, and array structural patterns (whether written inline or multiline) must left untouched unless that specific line is being directly refactored.
+
 * **Comments:** Detailed inline comments are welcome and encouraged to explain complex business logic steps.
-* **Principles:** Maintain a strong focus on **DRY, SOLID, and YAGNI** principles, targeting the bare minimum code changes with maximum impact on performance.
+
+* **Principles:** Maintain a strong focus on DRY, SOLID, and YAGNI principles, targeting the bare minimum code changes with maximum impact on performance.
 
 ---
 
 ## 3. Complete Single-File CRUD Blueprint Example
 
-Below is a complete, monolithic code block containing all the necessary layers for a `Brand` resource. In practice, these are separated into individual domain files, but they are consolidated here in one place so the LLM can analyze the entire structure and relationships simultaneously.
+Below is the complete reference implementation containing all the necessary layers for a Brand resource. Gemini must analyze the structural relationships between these XML blocks when scaffolding new features.
 
 ```php
 // ==========================================
 // 1. DATABASE MIGRATION
 // ==========================================
-
+<migration_layer>
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -52,10 +54,12 @@ return new class extends Migration
         });
     } 
 };
+</migration_layer>
 
 // ==========================================
 // 2. STRICT ELOQUENT MODEL
 // ==========================================
+<model_layer>
 declare(strict_types=1);
 
 namespace App\Models;
@@ -104,11 +108,12 @@ final class Brand extends Model
         return $builder->where('name', 'like', "%{$name}%");
     }
 }
+</model_layer>
 
 // ==========================================
-// 3. FORM REQUEST (VALIDATION)
+// 3. FORM REQUESTS (VALIDATION)
 // ==========================================
-
+<validation_layer>
 declare(strict_types=1);
 
 namespace App\Http\Requests;
@@ -177,9 +182,12 @@ final class UpdateBrandRequest extends FormRequest
         ];
     }
 }
+</validation_layer>
+
 // ==========================================
 // 4. DATA TRANSFER OBJECT (DTO)
 // ==========================================
+<dto_layer>
 declare(strict_types=1);
 
 namespace App\DTO;
@@ -203,17 +211,19 @@ final readonly class BrandData
         );
     }
 }
+</dto_layer>
 
 // ==========================================
-// 5. ATOMIC ACTION CLASS: Create, Update, Delete
+// 5. ATOMIC ACTION CLASSES
 // ==========================================
-
+<action_layer>
 declare(strict_types=1);
 
 namespace App\Actions\Brand;
 
 use App\Models\Brand;
 use App\DTO\BrandData;
+use Illuminate\Support\Facades\DB;
 
 final readonly class CreateBrand
 {
@@ -230,7 +240,6 @@ final readonly class CreateBrand
             return $brand;
     
         });
-
     }
 }
 
@@ -240,12 +249,13 @@ namespace App\Actions\Brand;
 
 use App\Models\Brand;
 use App\DTO\BrandData;
+use Illuminate\Support\Facades\DB;
 
 final readonly class UpdateBrand
 {
-    public function handle(BrandData $dto): Brand
+    public function handle(Brand $item, BrandData $dto): Brand
     {
-      return DB::transaction(function () use ($item, $dto): Brand {
+        return DB::transaction(function () use ($item, $dto): Brand {
             $item->update([
                 'name'      => $dto->name,
                 'code'      => $dto->code,
@@ -259,7 +269,7 @@ final readonly class UpdateBrand
 
 declare(strict_types=1);
 
-namespace App\Actions;
+namespace App\Actions\Brand;
 
 use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
@@ -269,22 +279,23 @@ final readonly class DeleteBrand
     public function handle(Brand $item): bool
     {
         return DB::transaction(function () use ($item) {
-            return $item->delete();
+            return (bool) $item->delete();
         });
     }
 }
+</action_layer>
 
 // ==========================================
 // 6. CONTROLLER (CRUDDY BY DESIGN)
 // ==========================================
-
+<controller_layer>
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Actions\CreateBrand;
-use App\Actions\DeleteBrand;
-use App\Actions\UpdateBrand;
+use App\Actions\Brand\CreateBrand;
+use App\Actions\Brand\DeleteBrand;
+use App\Actions\Brand\UpdateBrand;
 use App\DTO\BrandData;
 use App\Http\Requests\BrandIndexRequest;
 use App\Http\Requests\CreateBrandRequest;
@@ -297,7 +308,7 @@ use Inertia\Response;
 
 final readonly class BrandController
 {
-    public function index(BrandIndexRequest $request): Response
+    public function index(BrandIndexRequest $request): Response|JsonResponse
     {
         $query = Brand::query();
 
@@ -315,7 +326,7 @@ final readonly class BrandController
         ]);
     }
 
-    public function show(Brand $brand): JsonResponse
+    public function show(Brand $brand): Response|JsonResponse
     {
         // Option 1: API Response
         if (request()->wantsJson()) {
@@ -334,7 +345,7 @@ final readonly class BrandController
     public function store(
         CreateBrandRequest $request,
         CreateBrand $action
-    ): JsonResponse {
+    ): JsonResponse|\Illuminate\Http\RedirectResponse {
 
         $data = BrandData::fromRequest($request);
 
@@ -356,7 +367,7 @@ final readonly class BrandController
         UpdateBrandRequest $request,
         Brand $brand,
         UpdateBrand $action
-    ): JsonResponse {
+    ): JsonResponse|\Illuminate\Http\RedirectResponse {
 
         $data = BrandData::fromRequest($request);
 
@@ -377,7 +388,7 @@ final readonly class BrandController
     public function destroy(
         Brand $brand,
         DeleteBrand $action
-    ): JsonResponse {
+    ): JsonResponse|\Illuminate\Http\RedirectResponse {
 
         $action->handle($brand);
 
@@ -393,11 +404,12 @@ final readonly class BrandController
         return redirect()->intended(route('dashboard', absolute: false));
     }
 }
-
+</controller_layer>
 
 // ==========================================
 // 7. JSON RESOURCE
 // ==========================================
+<resource_layer>
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -417,11 +429,12 @@ final class BrandResource extends JsonResource
         ];
     }
 }
+</resource_layer>
 
 // ==========================================
 // 8. FACTORY
 // ==========================================
-
+<factory_layer>
 declare(strict_types=1);
 
 namespace Database\Factories;
@@ -443,14 +456,13 @@ final class BrandFactory extends Factory
         $levels = ['Low', 'Medium', 'High', 'Critical', 'Emergency', 'Alert', 'Notice', 'Informational'];
 
         return [
-            // convert template_name to uppercase
             'name' => strtoupper(fake()->randomElement($levels).'-'.fake()->randomElement($greek_letters).'-'.fake()->randomNumber(3)),
             'code' => fake()->unique()->regexify('[A-Z]{5}[0-4]{3}'),
             'is_active' => fake()->boolean(),
         ];
     }
 }
-
+</factory_layer>
 ```
 
 ---
@@ -459,4 +471,6 @@ final class BrandFactory extends Factory
 
 When initializing a new conversation or task, start your prompt by feeding this file to the model and stating:
 
-> *"Using the provided CRUD blueprint, generate a complete CRUD resource structure for the `[RESOURCE_NAME]` entity with the following fields: `[FIELDS_AND_TYPES]`. Adhere strictly to the DTO+Action design pattern, single-file structural relationship, dedicated Form Requests, Route Model Binding, and preserve all code formatting rules and whitespaces."*
+```
+"Using the provided CRUD blueprint, map out a complete new feature set. Replicate the structural layers found inside <migration_layer>, <model_layer>, <validation_layer>, <dto_layer>, <action_layer>, <controller_layer>, <resource_layer>, and <factory_layer> for the [RESOURCE_NAME] entity with these fields: [FIELDS_AND_TYPES]. Adhere strictly to the DTO+Action design pattern, preserve all formatting, strict typing, and whitespace choices exactly as shown."
+```

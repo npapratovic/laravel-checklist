@@ -10,14 +10,25 @@ When initializing a new conversation or task, start your prompt by feeding this 
 EXAMPLE FIELDS SPECIFICATION:
 
 client_id (unsignedBigInteger, indexed, foreign key)
+
 rule_name (string, indexed)
+
 is_active (boolean, default: true, indexed)
+
 operational_status (string, enum)
+
 reference_date (dateTime/timestamp)
+
 condition_type (string, enum)
+
 offset_direction (string, enum)
+
 offset_value (integer)
+
 action_type (string, enum)
+
 template_id (unsignedBigInteger, foreign key to communication_templates)
+
 recipient_type (string, enum)
+
 severity (string, enum)

@@ -463,4 +463,34 @@ final class BrandFactory extends Factory
     }
 }
 </factory_layer>
+
+// ==========================================
+// 9. ENUM
+// ==========================================
+<enum_layer>
+
+namespace App\Enums;
+
+enum BrandTypeEnum: string
+{
+    case CLIENT = 'client';
+    case CUSTOMER = 'customer';
+    case INTERNAL = 'internal';
+
+    public function getLabel(): string
+    {
+        return match ($this) {
+            self::CLIENT => 'Client',
+            self::CUSTOMER => 'Customer',
+            self::INTERNAL => 'Internal',
+        };
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+}
+</enum_layer>
+
 ```
